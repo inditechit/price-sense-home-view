@@ -64,38 +64,7 @@ const ModelExplanation = () => {
           </TabsContent>
           <TabsContent value="code" className="p-4 border rounded-md mt-2 bg-gray-50">
             <pre className="bg-gray-800 text-gray-100 p-4 rounded-md text-sm overflow-x-auto">
-              {`# Sample code snippet from our model training process
-import pandas as pd
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_absolute_error
-
-# Load and prepare the dataset
-df = pd.read_csv('housing_data.csv')
-X = df.drop('price', axis=1)
-y = df['price']
-
-# Split the data
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42)
-
-# Train a Random Forest model
-model = RandomForestRegressor(n_estimators=100, random_state=42)
-model.fit(X_train, y_train)
-
-# Evaluate the model
-predictions = model.predict(X_test)
-mae = mean_absolute_error(y_test, predictions)
-print(f"Model MAE: ${mae:.2f}")
-
-# Feature importance
-feature_importance = pd.DataFrame({
-    'feature': X.columns,
-    'importance': model.feature_importances_
-}).sort_values('importance', ascending=False)
-
-print("Top 5 most important features:")
-print(feature_importance.head(5))`}
+              {"# Sample code snippet from our model training process\nimport pandas as pd\nfrom sklearn.ensemble import RandomForestRegressor\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_absolute_error\n\n# Load and prepare the dataset\ndf = pd.read_csv('housing_data.csv')\nX = df.drop('price', axis=1)\ny = df['price']\n\n# Split the data\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42)\n\n# Train a Random Forest model\nmodel = RandomForestRegressor(n_estimators=100, random_state=42)\nmodel.fit(X_train, y_train)\n\n# Evaluate the model\npredictions = model.predict(X_test)\nmae = mean_absolute_error(y_test, predictions)\nprint(f\"Model MAE: ${mae:.2f}\")\n\n# Feature importance\nfeature_importance = pd.DataFrame({\n    'feature': X.columns,\n    'importance': model.feature_importances_\n}).sort_values('importance', ascending=False)\n\nprint(\"Top 5 most important features:\")\nprint(feature_importance.head(5))"}
             </pre>
           </TabsContent>
         </Tabs>
