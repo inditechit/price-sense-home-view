@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
-import { Home, LineChart, Info } from "lucide-react";
+import { Home, LineChart, Info, Phone, Building } from "lucide-react";
 
 const Navbar = () => {
   return (
@@ -21,8 +21,14 @@ const Navbar = () => {
           <Link to="/predict" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
             Predict
           </Link>
+          <Link to="/properties" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
+            Properties
+          </Link>
           <Link to="/about" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
             About Model
+          </Link>
+          <Link to="/contact" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
+            Contact
           </Link>
         </nav>
         <div className="flex items-center gap-4">
