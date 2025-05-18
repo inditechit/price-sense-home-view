@@ -1,9 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HouseFeatureForm from '@/components/HouseFeatureForm';
 import PriceResult from '@/components/PriceResult';
+// import { csvToJson } from '@/pages/api/index.js';
 
 const PredictPage = () => {
   const [showResults, setShowResults] = useState(false);
@@ -12,6 +13,21 @@ const PredictPage = () => {
   setTimeout(() => {
     setShowResults(true);
   }, 2000);
+
+  useEffect(() => {
+    fetchCsvData();
+  }, []);
+  
+  const fetchCsvData = async () => {
+    try {
+      const res = await fetch('http://localhost:3000/api/csvToJson');
+      const result = await res.json();
+      console.log(result); // ✅ contains your CSV converted to JSON
+    } catch (error) {
+      console.error('Failed to fetch CSV data:', error);
+    }
+  };
+  
   
   return (
     <div className="min-h-screen flex flex-col">

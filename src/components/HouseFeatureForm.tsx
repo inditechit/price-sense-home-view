@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,123 +12,113 @@ const HouseFeatureForm = () => {
       <CardContent className="pt-6">
         <form>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* House Size */}
             <div className="space-y-2">
-              <Label htmlFor="size">House Size (sq ft)</Label>
-              <Input id="size" type="number" placeholder="e.g., 2000" />
+              <Label htmlFor="GrLivArea">Above Ground Living Area (sq ft)</Label>
+              <Input id="GrLivArea" type="number" placeholder="e.g., 1710" />
             </div>
-            
+
+            {/* Total Basement Area */}
             <div className="space-y-2">
-              <Label htmlFor="year">Year Built</Label>
-              <Input id="year" type="number" placeholder="e.g., 1990" />
+              <Label htmlFor="TotalBsmtSF">Total Basement Area (sq ft)</Label>
+              <Input id="TotalBsmtSF" type="number" placeholder="e.g., 856" />
             </div>
-            
+
+            {/* Year Built */}
             <div className="space-y-2">
-              <Label htmlFor="bedrooms">Bedrooms</Label>
+              <Label htmlFor="YearBuilt">Year Built</Label>
+              <Input id="YearBuilt" type="number" placeholder="e.g., 2003" />
+            </div>
+
+            {/* Year Remodeled */}
+            <div className="space-y-2">
+              <Label htmlFor="YearRemodAdd">Year Remodeled</Label>
+              <Input id="YearRemodAdd" type="number" placeholder="e.g., 2003" />
+            </div>
+
+            {/* Bedrooms */}
+            <div className="space-y-2">
+              <Label htmlFor="BedroomAbvGr">Bedrooms Above Ground</Label>
               <Select>
-                <SelectTrigger id="bedrooms">
+                <SelectTrigger id="BedroomAbvGr">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="1">1</SelectItem>
-                  <SelectItem value="2">2</SelectItem>
-                  <SelectItem value="3">3</SelectItem>
-                  <SelectItem value="4">4</SelectItem>
-                  <SelectItem value="5">5</SelectItem>
-                  <SelectItem value="6+">6+</SelectItem>
+                  {[1, 2, 3, 4, 5, 6].map(num => (
+                    <SelectItem key={num} value={String(num)}>{num}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
-            
+
+            {/* Bathrooms */}
             <div className="space-y-2">
-              <Label htmlFor="bathrooms">Bathrooms</Label>
+              <Label htmlFor="FullBath">Full Bathrooms</Label>
               <Select>
-                <SelectTrigger id="bathrooms">
+                <SelectTrigger id="FullBath">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="1">1</SelectItem>
-                  <SelectItem value="1.5">1.5</SelectItem>
-                  <SelectItem value="2">2</SelectItem>
-                  <SelectItem value="2.5">2.5</SelectItem>
-                  <SelectItem value="3">3</SelectItem>
-                  <SelectItem value="3.5">3.5</SelectItem>
-                  <SelectItem value="4+">4+</SelectItem>
+                  {[1, 2, 3].map(num => (
+                    <SelectItem key={num} value={String(num)}>{num}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
-            
+
+            {/* Garage Cars */}
             <div className="space-y-2">
-              <Label htmlFor="location">Location</Label>
+              <Label htmlFor="GarageCars">Garage (Car Capacity)</Label>
               <Select>
-                <SelectTrigger id="location">
-                  <SelectValue placeholder="Select city" />
+                <SelectTrigger id="GarageCars">
+                  <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="san-francisco">San Francisco, CA</SelectItem>
-                  <SelectItem value="new-york">New York, NY</SelectItem>
-                  <SelectItem value="los-angeles">Los Angeles, CA</SelectItem>
-                  <SelectItem value="chicago">Chicago, IL</SelectItem>
-                  <SelectItem value="seattle">Seattle, WA</SelectItem>
-                  <SelectItem value="austin">Austin, TX</SelectItem>
-                  <SelectItem value="miami">Miami, FL</SelectItem>
+                  {[0, 1, 2, 3].map(num => (
+                    <SelectItem key={num} value={String(num)}>{num}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
-            
+
+            {/* Overall Quality */}
             <div className="space-y-2">
-              <Label htmlFor="neighborhood">Neighborhood</Label>
+              <Label htmlFor="OverallQual">Overall Quality</Label>
               <Select>
-                <SelectTrigger id="neighborhood">
-                  <SelectValue placeholder="Select neighborhood" />
+                <SelectTrigger id="OverallQual">
+                  <SelectValue placeholder="Rate 1-10" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="downtown">Downtown</SelectItem>
-                  <SelectItem value="suburban">Suburban</SelectItem>
-                  <SelectItem value="urban">Urban</SelectItem>
-                  <SelectItem value="rural">Rural</SelectItem>
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(q => (
+                    <SelectItem key={q} value={String(q)}>{q}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
           </div>
-          
+
+          {/* Additional Features */}
           <div className="mt-6">
             <Label className="text-base">Additional Features</Label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3">
-              <div className="flex items-center space-x-2">
-                <Checkbox id="garage" />
-                <Label htmlFor="garage" className="text-sm font-normal">Garage</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="garden" />
-                <Label htmlFor="garden" className="text-sm font-normal">Garden</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="balcony" />
-                <Label htmlFor="balcony" className="text-sm font-normal">Balcony</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="pool" />
-                <Label htmlFor="pool" className="text-sm font-normal">Pool</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="ac" />
-                <Label htmlFor="ac" className="text-sm font-normal">Air Conditioning</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="fireplace" />
-                <Label htmlFor="fireplace" className="text-sm font-normal">Fireplace</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="basement" />
-                <Label htmlFor="basement" className="text-sm font-normal">Basement</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="renovated" />
-                <Label htmlFor="renovated" className="text-sm font-normal">Renovated</Label>
-              </div>
+              {[
+                { id: "CentralAir", label: "Central Air" },
+                { id: "Fireplace", label: "Fireplace" },
+                { id: "Bsmt", label: "Finished Basement" },
+                { id: "Garage", label: "Garage" },
+                { id: "Deck", label: "Wood Deck" },
+                { id: "Porch", label: "Open Porch" },
+                { id: "Renovated", label: "Recently Renovated" },
+                { id: "PavedDrive", label: "Paved Driveway" },
+              ].map(item => (
+                <div key={item.id} className="flex items-center space-x-2">
+                  <Checkbox id={item.id} />
+                  <Label htmlFor={item.id} className="text-sm font-normal">{item.label}</Label>
+                </div>
+              ))}
             </div>
           </div>
-          
+
           <Button className="w-full mt-8" size="lg">
             Predict Price
           </Button>
