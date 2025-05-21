@@ -26,7 +26,7 @@ const App = () => (
             <Route path="/predict" element={<PredictPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/properties" element={<PropertyListingsPage />} />
+            {/* <Route path="/properties" element={<PropertyListingsPage />} /> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

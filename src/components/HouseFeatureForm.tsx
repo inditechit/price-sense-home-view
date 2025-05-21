@@ -1,45 +1,75 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent } from "@/components/ui/card";
 
-const HouseFeatureForm = () => {
+interface Props {
+  onSubmit: (data: any) => void;
+  setShowResults?:any;
+}
+
+const HouseFeatureForm = ({ onSubmit,setShowResults }: Props) => {
+  const [GrLivArea, setGrLivArea] = useState('');
+  const [TotalBsmtSF, setTotalBsmtSF] = useState('');
+  const [YearBuilt, setYearBuilt] = useState('');
+  const [YearRemodAdd, setYearRemodAdd] = useState('');
+  const [BedroomAbvGr, setBedroomAbvGr] = useState('');
+  const [FullBath, setFullBath] = useState('');
+  const [GarageCars, setGarageCars] = useState('');
+  const [OverallQual, setOverallQual] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const filledData = {
+      GrLivArea,
+      TotalBsmtSF,
+      YearBuilt,
+      YearRemodAdd,
+      BedroomAbvGr,
+      FullBath,
+      GarageCars,
+      OverallQual,
+    };
+    setShowResults(true)
+    onSubmit(filledData); // Send to parent
+  };
+
   return (
     <Card className="w-full max-w-3xl mx-auto">
       <CardContent className="pt-6">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* House Size */}
             <div className="space-y-2">
               <Label htmlFor="GrLivArea">Above Ground Living Area (sq ft)</Label>
-              <Input id="GrLivArea" type="number" placeholder="e.g., 1710" />
+              <Input id="GrLivArea" type="number" value={GrLivArea} onChange={(e) => setGrLivArea(e.target.value)} placeholder="e.g., 1710" />
             </div>
 
             {/* Total Basement Area */}
             <div className="space-y-2">
               <Label htmlFor="TotalBsmtSF">Total Basement Area (sq ft)</Label>
-              <Input id="TotalBsmtSF" type="number" placeholder="e.g., 856" />
+              <Input id="TotalBsmtSF" type="number" value={TotalBsmtSF} onChange={(e) => setTotalBsmtSF(e.target.value)} placeholder="e.g., 856" />
             </div>
 
             {/* Year Built */}
             <div className="space-y-2">
               <Label htmlFor="YearBuilt">Year Built</Label>
-              <Input id="YearBuilt" type="number" placeholder="e.g., 2003" />
+              <Input id="YearBuilt" type="number" value={YearBuilt} onChange={(e) => setYearBuilt(e.target.value)} placeholder="e.g., 2003" />
             </div>
 
             {/* Year Remodeled */}
             <div className="space-y-2">
               <Label htmlFor="YearRemodAdd">Year Remodeled</Label>
-              <Input id="YearRemodAdd" type="number" placeholder="e.g., 2003" />
+              <Input id="YearRemodAdd" type="number" value={YearRemodAdd} onChange={(e) => setYearRemodAdd(e.target.value)} placeholder="e.g., 2003" />
             </div>
 
             {/* Bedrooms */}
             <div className="space-y-2">
               <Label htmlFor="BedroomAbvGr">Bedrooms Above Ground</Label>
-              <Select>
+              <Select value={BedroomAbvGr} onValueChange={setBedroomAbvGr}>
                 <SelectTrigger id="BedroomAbvGr">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
@@ -54,7 +84,7 @@ const HouseFeatureForm = () => {
             {/* Bathrooms */}
             <div className="space-y-2">
               <Label htmlFor="FullBath">Full Bathrooms</Label>
-              <Select>
+              <Select value={FullBath} onValueChange={setFullBath}>
                 <SelectTrigger id="FullBath">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
@@ -69,7 +99,7 @@ const HouseFeatureForm = () => {
             {/* Garage Cars */}
             <div className="space-y-2">
               <Label htmlFor="GarageCars">Garage (Car Capacity)</Label>
-              <Select>
+              <Select value={GarageCars} onValueChange={setGarageCars}>
                 <SelectTrigger id="GarageCars">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
@@ -84,7 +114,7 @@ const HouseFeatureForm = () => {
             {/* Overall Quality */}
             <div className="space-y-2">
               <Label htmlFor="OverallQual">Overall Quality</Label>
-              <Select>
+              <Select value={OverallQual} onValueChange={setOverallQual}>
                 <SelectTrigger id="OverallQual">
                   <SelectValue placeholder="Rate 1-10" />
                 </SelectTrigger>
@@ -97,29 +127,7 @@ const HouseFeatureForm = () => {
             </div>
           </div>
 
-          {/* Additional Features */}
-          <div className="mt-6">
-            <Label className="text-base">Additional Features</Label>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3">
-              {[
-                { id: "CentralAir", label: "Central Air" },
-                { id: "Fireplace", label: "Fireplace" },
-                { id: "Bsmt", label: "Finished Basement" },
-                { id: "Garage", label: "Garage" },
-                { id: "Deck", label: "Wood Deck" },
-                { id: "Porch", label: "Open Porch" },
-                { id: "Renovated", label: "Recently Renovated" },
-                { id: "PavedDrive", label: "Paved Driveway" },
-              ].map(item => (
-                <div key={item.id} className="flex items-center space-x-2">
-                  <Checkbox id={item.id} />
-                  <Label htmlFor={item.id} className="text-sm font-normal">{item.label}</Label>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <Button className="w-full mt-8" size="lg">
+          <Button type="submit" className="w-full mt-8" size="lg">
             Predict Price
           </Button>
         </form>

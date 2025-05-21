@@ -8,11 +8,12 @@ import PriceResult from '@/components/PriceResult';
 
 const PredictPage = () => {
   const [showResults, setShowResults] = useState(false);
-
-  // We'd normally handle this with form submission, but for UI demo purposes:
-  setTimeout(() => {
-    setShowResults(true);
-  }, 2000);
+  const [formData, setFormData] = useState({})
+  const [results, setResults]:any = useState()
+  
+  // setTimeout(() => {
+  //   setShowResults(true);
+  // }, 2000);
 
   useEffect(() => {
     fetchCsvData();
@@ -22,7 +23,7 @@ const PredictPage = () => {
     try {
       const res = await fetch('http://localhost:3000/api/csvToJson');
       const result = await res.json();
-      console.log(result); // ✅ contains your CSV converted to JSON
+      setResults(result); // ✅ contains your CSV converted to JSON
     } catch (error) {
       console.error('Failed to fetch CSV data:', error);
     }
@@ -34,6 +35,7 @@ const PredictPage = () => {
       <Navbar />
       <main className="flex-grow pt-24 pb-16">
         <div className="container px-4 md:px-6">
+        {!showResults && <>
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">Predict Your House Price</h1>
             <p className="text-lg text-gray-600">
@@ -41,9 +43,10 @@ const PredictPage = () => {
             </p>
           </div>
           
-          <div className="mb-16">
-            <HouseFeatureForm />
+           <div className="mb-16">
+            <HouseFeatureForm onSubmit={setFormData} setShowResults={setShowResults}/>
           </div>
+          </>}
           
           {showResults && (
             <div className="mt-16">
@@ -54,7 +57,7 @@ const PredictPage = () => {
                 </p>
               </div>
               
-              <PriceResult />
+              <PriceResult dataToFilter={formData} allData={results}/>
             </div>
           )}
         </div>

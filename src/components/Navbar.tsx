@@ -21,9 +21,9 @@ const Navbar = () => {
           <Link to="/predict" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
             Predict
           </Link>
-          <Link to="/properties" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
+          {/* <Link to="/properties" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
             Properties
-          </Link>
+          </Link> */}
           <Link to="/about" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
             About Model
           </Link>
